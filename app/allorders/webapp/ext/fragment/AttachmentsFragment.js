@@ -24,6 +24,13 @@ sap.ui.define([
             // if (oBindingContext && this.oUploadPluginInstance) {
             //     this.oUploadPluginInstance.openFilePreview(oBindingContext);
             // }
+            var srvUrl = this._view.getModel().sServiceUrl
+            const oCtx = oEvent.getSource().getBindingContext().getPath();
+            let url= srvUrl + oCtx.slice(1);
+             url+="/content";
+             if (url) {
+                sap.m.URLHelper.redirect(url, true); // opens image directly
+            }
             
         },
         onRemoveHandler: async function (oEvent) {

@@ -19,6 +19,14 @@
       "target": "$1",
       "service": "html5-apps-repo-rt",
       "authenticationType": "xsuaa"
+    },
+    {
+      "source": "^/sbpa-workflow/(.*)$",
+      "target": "/$1",
+      "destination": "sbpa-api-trigger-dest", 
+      "authenticationType": "xsuaa",
+      "csrfProtection": false
     }
   ]
 }
+

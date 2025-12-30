@@ -131,7 +131,8 @@
                     "type": "ResponsiveTable"
                   }
                 }
-              }
+              },
+              "defaultTemplateAnnotationPath": "com.sap.vocabularies.UI.v1.SelectionPresentationVariant#table"
             }
           }
         },
@@ -155,6 +156,18 @@
                   "tableSettings": {
                     "creationMode": {
                       "creationFields": "issueType_code,requestType_code"
+                    }
+                  }
+                }
+              },
+              "content": {
+                "footer": {
+                  "actions": {
+                    "approvalButton": {
+                      "press": "allorders.ext.controller.Approve.onApprove",
+                      "visible": "{ui>/isEditable}",
+                      "enabled": true,
+                      "text": "Send For Approval"
                     }
                   }
                 }

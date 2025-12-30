@@ -94,7 +94,7 @@
 								>
 									<Link id="_IDGenLink"
 										text="{fileName}"
-										href="{= ${url}.replace('IsActiveEntity=false','IsActiveEntity=true') }"
+									
 										press="handler.openPreview"
 										class="sapUiTinyMarginBottom"		
 									/>

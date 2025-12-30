@@ -212,3 +212,7 @@ annotate service.Issues with @(
     ]
 );
 
+annotate service.Orders with {
+    totalAmount @Common.FieldControl : #Mandatory
+};
+

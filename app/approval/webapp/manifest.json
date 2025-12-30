@@ -1,0 +1,211 @@
+{
+  "_version": "1.76.0",
+  "sap.app": {
+    "id": "approval",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:lrop",
+      "version": "1.20.0",
+      "toolsId": "f0f7472f-becc-4af2-8894-a94bf4fde127"
+    },
+    "dataSources": {
+      "mainService": {
+        "uri": "/odata/v4/approval/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "odataVersion": "4.0"
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": true,
+    "dependencies": {
+      "minUI5Version": "1.143.2",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.fe.templates": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "approval.i18n.i18n"
+        }
+      },
+      "": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
+      },
+      "@i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "uri": "i18n/i18n.properties"
+      }
+    },
+    "resources": {
+      "css": []
+    },
+    "routing": {
+      "config": {},
+      "routes": [
+        {
+          "pattern": ":?query:",
+          "name": "IssuesList",
+          "target": "IssuesList"
+        },
+        {
+          "pattern": "Issues({key}):?query:",
+          "name": "IssuesObjectPage",
+          "target": "IssuesObjectPage"
+        },
+        {
+          "pattern": "Issues({key})/IssuesToComments({key2}):?query:",
+          "name": "CommentsObjectPage",
+          "target": "CommentsObjectPage"
+        },
+        {
+          "name": "Issues_IssuesToAttachmentsObjectPage",
+          "pattern": "Issues({key})/IssuesToAttachments({IssuesToAttachmentsKey}):?query:",
+          "target": "Issues_IssuesToAttachmentsObjectPage"
+        }
+      ],
+      "targets": {
+        "IssuesList": {
+          "type": "Component",
+          "id": "IssuesList",
+          "name": "sap.fe.templates.ListReport",
+          "options": {
+            "settings": {
+              "contextPath": "/Issues",
+              "variantManagement": "Page",
+              "navigation": {
+                "Issues": {
+                  "detail": {
+                    "route": "IssuesObjectPage"
+                  }
+                }
+              },
+              "controlConfiguration": {
+                "@com.sap.vocabularies.UI.v1.LineItem": {
+                  "tableSettings": {
+                    "type": "ResponsiveTable"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "IssuesObjectPage": {
+          "type": "Component",
+          "id": "IssuesObjectPage",
+          "name": "sap.fe.templates.ObjectPage",
+          "options": {
+            "settings": {
+              "editableHeaderContent": false,
+              "contextPath": "/Issues",
+              "navigation": {
+                "IssuesToComments": {
+                  "detail": {
+                    "route": "CommentsObjectPage"
+                  }
+                },
+                "IssuesToAttachments": {
+                  "detail": {
+                    "route": "Issues_IssuesToAttachmentsObjectPage"
+                  }
+                }
+              },
+              "content": {
+                "body": {
+                  "sections": {
+                    "Approvercomments": {
+                      "template": "approval.ext.fragment.Approvercomments",
+                      "position": {
+                        "placement": "After",
+                        "anchor": "UserAttachments"
+                      },
+                      "title": "Approver Comments"
+                    }
+                  }
+                }
+              },
+              "controlConfiguration": {
+                "IssuesToAttachments/@com.sap.vocabularies.UI.v1.LineItem#UserAttachments1": {
+                  "tableSettings": {
+                    "type": "ResponsiveTable"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "CommentsObjectPage": {
+          "type": "Component",
+          "id": "CommentsObjectPage",
+          "name": "sap.fe.templates.ObjectPage",
+          "options": {
+            "settings": {
+              "editableHeaderContent": false,
+              "contextPath": "/Issues/IssuesToComments"
+            }
+          }
+        },
+        "Issues_IssuesToAttachmentsObjectPage": {
+          "type": "Component",
+          "id": "Issues_IssuesToAttachmentsObjectPage",
+          "name": "sap.fe.templates.ObjectPage",
+          "options": {
+            "settings": {
+              "navigation": {},
+              "contextPath": "/Issues/IssuesToAttachments"
+            }
+          }
+        }
+      }
+    },
+    "extends": {
+      "extensions": {
+        "sap.ui.controllerExtensions": {}
+      }
+    }
+  },
+  "sap.fiori": {
+    "registrationIds": [],
+    "archeType": "transactional"
+  }
+}

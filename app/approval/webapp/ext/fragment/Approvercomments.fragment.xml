@@ -1,0 +1,53 @@
+
+<core:FragmentDefinition
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m">
+
+    <VBox
+        id="commentsFragmentVBox"
+        width="100%"
+        class="sapUiSmallMargin"
+        core:require="{ handler: 'approval/ext/fragment/Approvercomments' }">
+
+        <HBox 
+            id="commentsFragment-ViewAllHBox"
+            width="100%" 
+            justifyContent="End">
+            <Button
+                id="commentsFragment-ViewAllButton"
+                text="Comments"
+                type="Transparent"
+                press="handler.onLoadComments"
+                icon="sap-icon://comment"/>
+        </HBox>
+
+        <TextArea
+            id="commentsFragment-CommentTextArea"
+            rows="5"
+            width="100%"
+            placeholder="Enter your comment..."
+            />
+
+        <HBox
+            id="commentsFragment-ButtonHBox"
+            justifyContent="End"
+            class="sapUiSmallMarginTop">
+
+			
+			<Button
+        id="commentsFragment-ApproveButton"
+        text="Approve"
+        type="Accept"
+        press="handler.onApprovePress" />
+    <Button
+        id="commentsFragment-RejectButton"
+        text="Reject"
+        type="Reject"
+        press="handler.onRejectPress"
+        class="sapUiSmallMarginBegin sapUiMediumMarginEnd" />
+           
+
+        </HBox>
+
+    </VBox>
+</core:FragmentDefinition>

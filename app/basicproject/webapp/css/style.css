@@ -1,0 +1,47 @@
+/* === Rounded Table Container === */
+.customTable {
+    margin: 1rem;
+    border-radius: 12px;
+    overflow: hidden; /* REQUIRED for rounding */
+    border: 1px solid var(--sapList_BorderColor);
+    background: var(--sapList_Background);
+    
+}
+
+/* === Table Header === */
+.customTable .sapMTableTH {
+    background-color: var(--sapList_HeaderBackground);
+    font-weight: bold;
+    
+}
+
+/* === Inner table fix === */
+.customTable .sapMListTbl {
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+/* === Table Row === */
+.customRow {
+    height: 3rem;
+}
+
+/* === Row hover effect === */
+.customTable .sapMLIB:hover {
+    background-color: var(--sapList_Hover_Background);
+}
+
+/* === Cell text styling === */
+.customerId {
+    font-weight: bold;
+    color: var(--sapHighlightColor);
+}
+
+.customerName {
+    color: var(--sapTextColor);
+}
+
+.emailText {
+    color: var(--sapContent_LabelColor);
+    font-style: italic;
+}

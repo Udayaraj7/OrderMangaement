@@ -50,7 +50,37 @@ annotate service.Orders with @(
             Label : 'Total Amount',
             Value : totalAmount,
         },
+        {
+            $Type : 'UI.DataField',
+            Value : Status,
+            Label : 'Status',
+        },
     ],
+    UI.SelectionPresentationVariant #table : {
+        $Type : 'UI.SelectionPresentationVariantType',
+        PresentationVariant : {
+            $Type : 'UI.PresentationVariantType',
+            Visualizations : [
+                '@UI.LineItem',
+            ],
+        },
+        SelectionVariant : {
+            $Type : 'UI.SelectionVariantType',
+            SelectOptions : [
+                {
+                    $Type : 'UI.SelectOptionType',
+                    PropertyName : Status,
+                    Ranges : [
+                        {
+                            Sign : #I,
+                            Option : #EQ,
+                            Low : 'Delivered',
+                        },
+                    ],
+                },
+            ],
+        },
+    },
 );
 
 annotate service.Issues with @(
@@ -148,6 +178,7 @@ annotate service.Issues with {
             Label : 'requestType',
         },
         Common.ValueListWithFixedValues : true,
+        Common.FieldControl : #Mandatory,
 )};
 
 annotate service.Issues with {
@@ -165,6 +196,7 @@ annotate service.Issues with {
             Label : 'issueType',
         },
         Common.ValueListWithFixedValues : true,
+        Common.FieldControl : #Mandatory,
 )};
 
 annotate service.Orders with {
@@ -177,5 +209,9 @@ annotate service.Orders with {
 
 annotate service.Orders with {
     totalAmount @Common.FieldControl : #ReadOnly
+};
+
+annotate service.Issues with {
+    orderId @Common.FieldControl : #ReadOnly
 };
 

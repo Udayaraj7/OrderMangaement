@@ -18,9 +18,9 @@ entity Customer {
 entity Orders : managed {
     @title : 'OrderId'
     @readonly
-    key orderId : String;
-
-    customerId : String;
+    key orderId : String ;
+    @readonly
+   key  customerId : String ;
     totalAmount : Integer;
     Status :  String default 'Pending';
 
@@ -49,8 +49,10 @@ entity Issues : managed {
     @readonly
     key issueId : String;
 
+
     @title : 'Order ID' 
-    orderId : String;
+    @readonly
+    key orderId : String;
 
     @title : 'Issue Type'
     issueType   : Association to IssueTypes;
@@ -63,6 +65,8 @@ entity Issues : managed {
 
     @title : 'Approver Comments'
     approvercommentBox : String;
+
+    processInstanceId:String;
 
     
     IssuesToOrders : Association to one Orders

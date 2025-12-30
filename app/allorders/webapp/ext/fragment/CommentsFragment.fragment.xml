@@ -21,14 +21,16 @@
                 id="commentsFragment-ViewAllButton"
                 text="View All Comments"
                 type="Transparent"
-                press="handler.onLoadComments"/>
+                press="handler.onLoadComments"
+                icon="sap-icon://comment"/>
         </HBox>
 
         <TextArea
             id="commentsFragment-CommentTextArea"
             rows="5"
             width="100%"
-            placeholder="Enter your comment..." />
+            placeholder="Enter your comment..."
+            enabled="{= !${IsActiveEntity}}" />
 
         <HBox
             id="commentsFragment-ButtonHBox"

@@ -21,7 +21,9 @@
     "build": "rimraf resources mta_archives && mbt build --mtar archive",
     "deploy": "cf deploy mta_archives/archive.mtar --retries 1",
     "watch-orders": "cds watch --open orders/index.html?sap-ui-xx-viewCache=false --livereload false",
-    "watch-allorders": "cds watch --open allorders/index.html?sap-ui-xx-viewCache=false --livereload false"
+    "watch-allorders": "cds watch --open allorders/index.html?sap-ui-xx-viewCache=false --livereload false",
+    "watch-approval": "cds watch --open approval/index.html?sap-ui-xx-viewCache=false --livereload false",
+    "watch-basicproject": "cds watch --open basicproject/index.html?sap-ui-xx-viewCache=false --livereload false"
   },
   "private": true,
   "cds": {
@@ -37,6 +39,7 @@
   ],
   "sapux": [
     "app/admin",
-    "app/allorders"
+    "app/allorders",
+    "app/approval"
   ]
 }

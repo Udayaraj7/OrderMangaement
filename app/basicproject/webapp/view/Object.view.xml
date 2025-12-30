@@ -1,0 +1,64 @@
+<mvc:View
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:f="sap.ui.layout.form"
+    controllerName="basicproject.controller.Object">
+
+    <Page
+        title="Customer Details"
+        showNavButton="true"
+        navButtonPress="onNavBack">
+
+        <content>
+            <f:SimpleForm 
+             editable="false"
+            >
+                <Label text="Customer ID"/>
+                <Text text="  {customerId}"/>
+
+                <Label text="Name"/>
+                <Text text="  {customerName}"/>
+            
+
+                <Label text="Email"/>
+                <Text text="{email}"/>
+
+                <Label text="Phone"/>
+                <Text text="{phoneNumber}"/>
+
+                <Label text="Address"/>
+                <Text text="{address}"/>
+            </f:SimpleForm>
+
+             <Title text="Orders" level="H2"/>
+
+            <Table
+            id="ordersTable"
+            class="customTable "
+             width="70rem"
+                items="{/Orders}"
+                inset="false">
+
+                <columns>
+                    <Column><Text text="Order ID"/></Column>
+                    <Column><Text text="Customer id"/></Column>
+                    <Column><Text text="Amount"/></Column>
+                </columns>
+
+                <items>
+                    <ColumnListItem>
+                        <cells>
+                            <Text text="{orderId}"/>
+                            <Text text="{customerId}"/>
+                            <Text text="{totalAmount}"/>
+                        </cells>
+                    </ColumnListItem>
+                </items>
+
+            </Table>
+        </content>
+
+        
+
+    </Page>
+</mvc:View>

@@ -19,6 +19,11 @@ service OrderIssueService {
 
  function commentsDraft(issueId:String,description:String)
         returns String;
+
+
+        function  triggerBpaProcess(issueId:String)
+        returns String;
+        
 }
 
 

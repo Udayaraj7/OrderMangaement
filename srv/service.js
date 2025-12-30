@@ -26,6 +26,43 @@ module.exports = cds.service.impl(function (srv) {
         console.log('draft Generated customer is:', req.data.orderId);
     });
 
+    
+    this.before("CREATE", Customer, req => {
+        debugger;
+        
+        if (!req.data.customerName) {
+            req.error(400, "Name is required");
+        }
+        else {
+            let patientName = req.data.customerName
+            if (patientName.length > 5) {
+                req.error(400, "Name length should be less than 6");
+            }
+        }
+
+        if (!req.data.phoneNumber) {
+            req.error(400, "phno is required");
+        }
+        else {
+            let phno = req.data.phoneNumber
+            if (phno.length!==10) {
+                req.error(400, "phno should be exactly 10 digits");
+            }
+
+            if (!req.data.email) {
+            req.error(400, "email is required");
+                  }
+
+             if (!req.data.address) {
+            req.error(400, "email is required");
+                 }
+
+        }  
+    });
+
+   
+
+
 
 
    
