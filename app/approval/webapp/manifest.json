@@ -78,7 +78,11 @@
       }
     },
     "resources": {
-      "css": []
+      "css": [
+        {
+          "uri": "css/style.css"
+        }
+      ]
     },
     "routing": {
       "config": {},
@@ -157,9 +161,17 @@
                       "template": "approval.ext.fragment.Approvercomments",
                       "position": {
                         "placement": "After",
-                        "anchor": "UserAttachments"
+                        "anchor": "Attachments"
                       },
-                      "title": "Approver Comments"
+                      "title": " Comments"
+                    },
+                    "Attachments": {
+                      "template": "approval.ext.fragment.Attachments",
+                      "position": {
+                        "placement": "Before",
+                        "anchor": "Approvercomments"
+                      },
+                      "title": "Attachments"
                     }
                   }
                 }

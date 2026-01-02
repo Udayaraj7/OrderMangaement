@@ -63,8 +63,6 @@ entity Issues : managed {
     @title : 'Issue Status'
     issueStatus :  String default 'Pending';
 
-    @title : 'Approver Comments'
-    approvercommentBox : String;
 
     processInstanceId:String;
 
@@ -85,6 +83,7 @@ entity Comments : cuid,managed {
      
     description : String;
     issueId : String;
+    commentBy:String;
 
     CommentsToIssues : Association to one Issues on CommentsToIssues.issueId = issueId;
 }
@@ -104,4 +103,14 @@ entity Attachments :cuid, managed {
     url : String;
 
     AttachmentsToIssues : Association to one Issues on AttachmentsToIssues.issueId = issueId;
+}
+
+
+entity Approvers{
+    @readonly
+    key approverId:String;
+    approverName:String;
+    approverEmail:String;
+    approverLevel:Integer;
+    
 }

@@ -25,6 +25,8 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension'], function (ControllerExten
 
 			 if(comment)
 				comment.setValue("");
+
+			 
         }
     }
 		}

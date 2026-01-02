@@ -89,27 +89,32 @@ annotate service.Issues with @(
             $Type : 'UI.DataField',
             Value : issueId,
             Label : 'Issue Id',
+            @HTML5.CssDefaults:{width:'10rem'}
         },
         {
             $Type : 'UI.DataField',
             Value : issueStatus,
             Label : 'Issue Status',
+            @HTML5.CssDefaults:{width:'10rem'}
         },
         {
             $Type : 'UI.DataField',
             Value : orderId,
             Label : 'Order Id',
+            @HTML5.CssDefaults:{width:'10rem'}
         },
         {
             $Type : 'UI.DataField',
             Value : issueType_code,
             Label : 'Issue Type',
             @UI.Importance : #High,
+            @HTML5.CssDefaults:{width:'10rem'}
         },
         {
             $Type : 'UI.DataField',
             Value : requestType_code,
             Label : 'Request Type',
+            @HTML5.CssDefaults:{width:'10rem'}
         },
     ],
     UI.Facets : [

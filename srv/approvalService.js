@@ -6,6 +6,8 @@ const axios=require('axios')
 module.exports = cds.service.impl(function (srv) {
       console.log("Service name:-->", srv.name);
 
+      const {Approvers} = this.entities;
+
 
       this.on('waitforApproval', async function (req) {
               debugger
@@ -22,10 +24,35 @@ module.exports = cds.service.impl(function (srv) {
                       });
                   console.log(response1);
 
+
+                   var currentResponse = await axios.get(`https://spa-api-gateway-bpi-us-prod.cfapps.us10.hana.ondemand.com/workflow/rest/v1/workflow-instances/${req.data.processId}/context`,
+                                  {
+                                      headers: {
+                                          'Authorization': 'Bearer ' + response1.data.access_token,
+                                      }
+                                  });
+                                  console.log(currentResponse)
+
+                                 let currentlevel =currentResponse.data.custom.currentlevel;
+                                 currentlevel=Math.floor(currentlevel);
+
+                                 let approversAtLevel = await SELECT.from('Approvers')
+  .columns('approverName', 'approverEmail')  
+  .where({ approverLevel: currentlevel });
+
+console.log(approversAtLevel);
+approversAtLevel=approversAtLevel[0];
+
+
+
+
                   var body = JSON.parse(JSON.stringify({
                     "executionId": req.data.processId,
                     "inputs": {
-                        "approvalstatus": req.data.status
+                        "approvalstatus": req.data.status,
+                        "currentapprovallevel":currentlevel,
+                        "approvername":approversAtLevel.approverName,
+                        "approveremail":approversAtLevel.approverEmail
                     }
                     }));
                   console.log(body);

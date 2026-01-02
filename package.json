@@ -23,7 +23,9 @@
     "watch-orders": "cds watch --open orders/index.html?sap-ui-xx-viewCache=false --livereload false",
     "watch-allorders": "cds watch --open allorders/index.html?sap-ui-xx-viewCache=false --livereload false",
     "watch-approval": "cds watch --open approval/index.html?sap-ui-xx-viewCache=false --livereload false",
-    "watch-basicproject": "cds watch --open basicproject/index.html?sap-ui-xx-viewCache=false --livereload false"
+    "watch-basicproject": "cds watch --open basicproject/index.html?sap-ui-xx-viewCache=false --livereload false",
+    "watch-basicpage2": "cds watch --open basicpage2/index.html?sap-ui-xx-viewCache=false --livereload false",
+    "watch-approvers": "cds watch --open approvers/index.html?sap-ui-xx-viewCache=false --livereload false"
   },
   "private": true,
   "cds": {
@@ -40,6 +42,7 @@
   "sapux": [
     "app/admin",
     "app/allorders",
-    "app/approval"
+    "app/approval",
+    "app/approvers"
   ]
 }

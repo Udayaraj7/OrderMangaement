@@ -1,0 +1,71 @@
+
+<mvc:View
+    controllerName="basicpage2.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form"
+    height="100%">
+    <f:DynamicPage id="checkoutPage" headerExpanded="true">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <Title text="Checkout Wizard"/>
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:content>
+            <Wizard id="checkoutWizard"
+                    class="sapUiResponsiveMargin"
+                    width="auto"
+                    complete="onWizardComplete">
+                <WizardStep id="stepCustomer" title="Customer Information" validated="true">
+                    <MessageStrip text="Enter  customer details" class="sapUiSmallMarginBottom"/>
+                    <form:SimpleForm editable="true" layout="ResponsiveGridLayout">
+                        <Label text="Customer ID"/>
+                        <Input value="{checkout>/customerId}" valueLiveUpdate="true"/>
+                        <Label text="Customer Name"/>
+                        <Input value="{checkout>/customerName}" required="true"/>
+                        <Label text="Email"/>
+                        <Input value="{checkout>/email}" type="Email" required="true"/>
+                        <Label text="Phone Number"/>
+                        <Input value="{checkout>/phoneNumber}"/>
+                        <Label text="Address"/>
+                        <TextArea value="{checkout>/address}" rows="3" required="true"/>
+                    </form:SimpleForm>
+                </WizardStep>
+
+                <WizardStep id="stepOrder" title="Order Details" validated="true">
+                    <MessageStrip text="Provide order information" class="sapUiSmallMarginBottom"/>
+                    <form:SimpleForm editable="true" layout="ResponsiveGridLayout">
+                        <Label text="Order ID "/>
+                        <Input value="{checkout>/orderId}" type="Text" required="true"/>
+                        <Label text="Total Amount"/>
+                        <Input value="{checkout>/totalAmount}" type="Number" required="true"/>
+                        <Label text="Status"/>
+                        <Input value="{checkout>/status}" type="Text"  />
+                    </form:SimpleForm>
+                </WizardStep>
+
+                <WizardStep id="stepReview" title="Review and Submit">
+                    <MessageStrip text="Review your information before submitting" type="Information" class="sapUiSmallMarginBottom"/>
+                    <Panel headerText="Customer Information">
+                        <List>
+                            <DisplayListItem label="Name" value="{checkout>/customerName}"/>
+                            <DisplayListItem label="Email" value="{checkout>/email}"/>
+                            <DisplayListItem label="Phone" value="{checkout>/phoneNumber}"/>
+                            <DisplayListItem label="Address" value="{checkout>/address}"/>
+                        </List>
+                    </Panel>
+                    <Panel headerText="Order Information">
+                        <List>
+                            <DisplayListItem label="Order Id" value="{checkout>/orderId}"/>
+                            <DisplayListItem label="Total Amount" value="{checkout>/totalAmount}"/>
+                            <DisplayListItem label="Status" value="Pending"/>
+                        </List>
+                    </Panel>
+                </WizardStep>
+            </Wizard>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>

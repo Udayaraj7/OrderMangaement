@@ -54,6 +54,14 @@ modules:
       - basicproject.zip
       name: basicproject
       target-path: resources/
+    - artifacts:
+      - basicpage2.zip
+      name: basicpage2
+      target-path: resources/
+    - artifacts:
+      - approvers.zip
+      name: approvers
+      target-path: resources/
 - name: admin
   type: html5
   path: app/admin
@@ -97,6 +105,26 @@ modules:
 - name: basicproject
   type: html5
   path: app/basicproject
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+- name: basicpage2
+  type: html5
+  path: app/basicpage2
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+- name: approvers
+  type: html5
+  path: app/approvers
   build-parameters:
     build-result: dist
     builder: custom

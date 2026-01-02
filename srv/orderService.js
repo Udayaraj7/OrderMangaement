@@ -12,7 +12,7 @@ module.exports = cds.service.impl(function (srv) {
    
 
 
-    const { Comments } = this.entities;
+    const { Comments ,Approvers} = this.entities;
 
     //Insert in to Patient table
     this.on('addComment', async function (req) {
@@ -53,8 +53,8 @@ module.exports = cds.service.impl(function (srv) {
 
         const { uuid } = cds.utils;
         const draftId = uuid();
-
-  
+        
+            
 
          const result2 = await INSERT.into('DRAFT.DraftAdministrativeData').entries({
             DraftUUID: draftId,
@@ -70,6 +70,8 @@ module.exports = cds.service.impl(function (srv) {
         const result = await INSERT.into(Comments.drafts).entries({
             description: req.data.description,
             issueId: req.data.issueId,
+            commentBy:'User',
+           
             
 
             
@@ -100,6 +102,11 @@ module.exports = cds.service.impl(function (srv) {
   }
 });
 
+  
+
+
+
+
 
 this.on('triggerBpaProcess', async function (req) {
         debugger
@@ -115,11 +122,16 @@ this.on('triggerBpaProcess', async function (req) {
                     }
                 });
             console.log(response1);
+
+
+//const totalApprovers = await SELECT.from(Approvers).count();
+const totalApprovers = (await SELECT.from(Approvers).columns('count(*) as total'))[0].total;
+
             var body = JSON.parse(JSON.stringify({
     "definitionId": "us10.17d1f7fatrial.approvalprocess.issueApproval",
     "context": {
         "issuid": req.data.issueId,
-        "levels": 2,
+        "levels": totalApprovers,
         "level": 1
     }
 }));
@@ -139,6 +151,12 @@ this.on('triggerBpaProcess', async function (req) {
   .set({ processInstanceId: instanceId })
   .where({ issueId: issueid });
 
+                await UPDATE(Issues.drafts)
+  .set({ processInstanceId: instanceId })
+  .where({ issueId: issueid });
+
+
+
 
  
  
@@ -147,6 +165,8 @@ this.on('triggerBpaProcess', async function (req) {
         }
   
     });
+
+  
 
 
 

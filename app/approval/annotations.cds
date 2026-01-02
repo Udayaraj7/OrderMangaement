@@ -32,18 +32,6 @@ annotate service.Issues with @(
             Label : 'General Information',
             Target : '@UI.FieldGroup#GeneratedGroup',
         },
-        {
-            $Type : 'UI.ReferenceFacet',
-            Label : 'User Comments',
-            ID : 'UserComments',
-            Target : 'IssuesToComments/@UI.LineItem#UserComments',
-        },
-        {
-            $Type : 'UI.ReferenceFacet',
-            Label : 'User Attachments',
-            ID : 'UserAttachments',
-            Target : 'IssuesToAttachments/@UI.LineItem#UserAttachments1',
-        },
     ],
     UI.LineItem : [
         {

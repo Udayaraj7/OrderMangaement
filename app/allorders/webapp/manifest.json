@@ -78,7 +78,11 @@
       }
     },
     "resources": {
-      "css": []
+      "css": [
+        {
+          "uri": "css/style.css"
+        }
+      ]
     },
     "routing": {
       "config": {},
@@ -157,6 +161,18 @@
                     "creationMode": {
                       "creationFields": "issueType_code,requestType_code"
                     }
+                  },
+                  "columns": {
+                    "Approve": {
+                      "header": "apitrigger",
+                      "width": "15rem",
+                      "position": {
+                        "anchor": "DataField::requestType_code",
+                        "placement": "After"
+                      },
+                      "template": "allorders.ext.fragment.Approve",
+                      "availability": "Hidden"
+                    }
                   }
                 }
               },
@@ -165,7 +181,7 @@
                   "actions": {
                     "approvalButton": {
                       "press": "allorders.ext.controller.Approve.onApprove",
-                      "visible": "{ui>/isEditable}",
+                      "visible": "{= !${ui>/isEditable}}",
                       "enabled": true,
                       "text": "Send For Approval"
                     }
