@@ -29,6 +29,8 @@ entity Orders : managed {
 
     OrdersToIssues : Composition of many Issues
         on OrdersToIssues.IssuesToOrders = $self;
+
+        OrdersToApprovalHistory:Composition of  many ApprovalHistory on OrdersToApprovalHistory.ApprovalHistoryToOrders=$self;
 }
 
 
@@ -76,6 +78,9 @@ entity Issues : managed {
     
     IssuesToAttachments : Composition of many Attachments
         on IssuesToAttachments.AttachmentsToIssues = $self;
+
+        IssuesToApprovalHistory : Composition of many ApprovalHistory
+        on IssuesToApprovalHistory.ApprovalHistoryToIssues = $self;
 }
 
 
@@ -113,4 +118,19 @@ entity Approvers{
     approverEmail:String;
     approverLevel:Integer;
     
+}
+
+entity ApprovalHistory:cuid {
+    key issueId : String;
+    key orderId:String;
+    processInstanceId: String;
+    level            : Integer;
+    approverName        : String ;
+    approverEmail       : String ;
+    status           : String ;
+    startedOn       : DateTime;
+    timeTaken:DateTime;
+     ApprovalHistoryToIssues : Association to one Issues on ApprovalHistoryToIssues.issueId = issueId;
+     ApprovalHistoryToOrders : Association to one Orders on ApprovalHistoryToOrders.orderId = orderId;
+   
 }

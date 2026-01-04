@@ -16,9 +16,12 @@ sap.ui.define([
                     if (sAction === MessageBox.Action.YES) {
 
                        	let oModel = sap.ui.core.Element.getElementById("allorders::OrdersObjectPage--fe::Form::GeneratedFacet1::Content").getModel();
-                        let iId=sap.ui.core.Element.getElementById("allorders::OrdersObjectPage--fe::table::OrdersToIssues::LineItem::Issues-innerTable").getItems()[0].getBindingContext().getObject().issueId;
+                        let issueId=sap.ui.core.Element.getElementById("allorders::OrdersObjectPage--fe::table::OrdersToIssues::LineItem::Issues-innerTable").getItems()[0].getBindingContext().getObject().issueId;
+                         let orderId=sap.ui.core.Element.getElementById("allorders::OrdersObjectPage--fe::table::OrdersToIssues::LineItem::Issues-innerTable").getItems()[0].getBindingContext().getObject().orderId;
 								let oFunc = oModel.bindContext(`/triggerBpaProcess(...)`);
-                                oFunc.setParameter("issueId",iId);
+                                oFunc.setParameter("issueId",issueId);
+                                oFunc.setParameter("orderId",orderId);
+
 								await oFunc.execute();
 								const result = oFunc.getBoundContext().getObject();
 								console.log("result === >>>", result)

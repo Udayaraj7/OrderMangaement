@@ -186,6 +186,18 @@
                       "text": "Send For Approval"
                     }
                   }
+                },
+                "body": {
+                  "sections": {
+                    "ProcessHistory": {
+                      "template": "allorders.ext.fragment.ProcessHistory",
+                      "position": {
+                        "placement": "After",
+                        "anchor": "Issues"
+                      },
+                      "title": "ProcessHistory"
+                    }
+                  }
                 }
               }
             }

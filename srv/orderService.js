@@ -124,15 +124,19 @@ this.on('triggerBpaProcess', async function (req) {
             console.log(response1);
 
 
-//const totalApprovers = await SELECT.from(Approvers).count();
-const totalApprovers = (await SELECT.from(Approvers).columns('count(*) as total'))[0].total;
+//const totalApprovers = (await SELECT.from(Approvers).columns('count(*) as total'))[0].total;
+const maxLevel = (await SELECT.from(Approvers).columns('max(approverLevel) as maxLevel'))[0]?.maxLevel ?? 0; 
+
+const approvers = await SELECT.from(Approvers);
 
             var body = JSON.parse(JSON.stringify({
     "definitionId": "us10.17d1f7fatrial.approvalprocess.issueApproval",
     "context": {
         "issuid": req.data.issueId,
-        "levels": totalApprovers,
-        "level": 1
+        "orderId":req.data.orderId,
+        "levels": maxLevel,
+        "level": 1,
+        "approverslist":approvers
     }
 }));
             console.log(body);
