@@ -7,12 +7,16 @@
         id="phVBox"
         core:require="{ handler: 'allorders/ext/fragment/ProcessHistory' }">
 
-        <Table
-            id="approvalHistoryTable"
-            headerText="Approval History"
-            items="{
-                path: 'OrdersToApprovalHistory'
-            }">
+         <Table
+    id="approvalHistoryTable"
+    headerText="Approval History"
+    items="{
+        path: 'OrdersToApprovalHistory',
+        sorter: [
+            { path: 'level', descending: false },
+            { path: 'startedOn', descending: false }
+        ]
+    }">
 
             <!-- ===== Columns ===== -->
             <columns>
@@ -86,7 +90,7 @@
 
                     <Text
                         id="txtCompletedOn"
-                        text="{timeTaken}}" />
+                        text="{timeTaken}" />
 
                 </ColumnListItem>
             </items>
