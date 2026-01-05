@@ -6,7 +6,7 @@ const axios = require('axios')
 module.exports = cds.service.impl(function (srv) {
     console.log("Service name:-->", srv.name);
 
-    const { Approvers, ApprovalHistory } = this.entities;
+    const { Approvers, ApprovalHistory ,Issues} = this.entities;
 
 
     this.on('waitforApproval', async function (req) {
@@ -79,35 +79,52 @@ module.exports = cds.service.impl(function (srv) {
             console.log("-------------------", approveResponse.data.custom)
             let custom = approveResponse.data.custom;
 
-            await INSERT.into(ApprovalHistory).entries({
-                orderId:approveResponse.data.startEvent.orderId,
-                issueId: approveResponse.data.startEvent.issuid,
-                processInstanceId: custom.processid,
-                level: custom.clevel,
-                approverName: custom.approvername,
-                approverEmail: custom.approveremail,
-                status: custom.status,
-                startedOn: custom.startedoncopy,
-                timeTaken: custom.timetaken
-            });
-
-            for (let i = 1; i <= totalapproversAtlevel.length; i++) {
-                let aname=totalapproversAtlevel[i].approverName;
-                let aEmail=totalapproversAtlevel[i].approverEmail;
-
-                await INSERT.into(ApprovalHistory).entries({
-                    orderId:approveResponse.data.startEvent.orderId,
-                    issueId: approveResponse.data.startEvent.issuid,
-                    processInstanceId: custom.processid,
-                    level: custom.clevel,
-                    approverName:aname ,
-                    approverEmail:aEmail ,
+            //update status and started and completion date
+            await UPDATE(ApprovalHistory)
+                .set({
                     status: custom.status,
                     startedOn: custom.startedoncopy,
                     timeTaken: custom.timetaken
+                })
+                .where({
+                    level: custom.clevel,
+                    processInstanceId: custom.processid
                 });
 
+            if (custom.status == "Approved" && custom.clevel < approveResponse.data.startEvent.levels) {
+                let nlevel = custom.clevel + 1;
+
+                const levelApprovers = await SELECT
+                    .from('Approvers')
+                    .columns('approverName', 'approverEmail')
+                    .where({ approverLevel: nlevel });
+
+                const historyEntries = levelApprovers.map(a => ({
+                    orderId: approveResponse.data.startEvent.orderId,
+                    issueId: approveResponse.data.startEvent.issuid,
+                    processInstanceId: custom.processid,
+                    level: nlevel,
+                    approverName: a.approverName,
+                    approverEmail: a.approverEmail,
+                    status: "Pending"
+                }));
+
+                await INSERT.into(ApprovalHistory).entries(historyEntries);
             }
+
+          
+        
+            if (custom.workflowcompleted==="Completed") {
+
+                await UPDATE(Issues)
+                    .set({ processInstanceId: null })
+                    .where({ issueId: approveResponse.data.startEvent.issuid });
+
+            }
+
+
+
+
 
 
 

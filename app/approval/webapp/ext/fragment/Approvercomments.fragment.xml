@@ -28,26 +28,7 @@
             placeholder="Enter your comment..."
             />
 
-        <HBox
-            id="commentsFragment-ButtonHBox"
-            justifyContent="End"
-            class="sapUiSmallMarginTop">
-
-			
-			<Button
-        id="commentsFragment-ApproveButton"
-        text="Approve"
-        type="Accept"
-        press="handler.onApprovePress" />
-    <Button
-        id="commentsFragment-RejectButton"
-        text="Reject"
-        type="Reject"
-        press="handler.onRejectPress"
-        class="sapUiSmallMarginBegin sapUiMediumMarginEnd" />
-           
-
-        </HBox>
+      
 
     </VBox>
 </core:FragmentDefinition>

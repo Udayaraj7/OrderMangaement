@@ -172,6 +172,30 @@
                         "anchor": "Approvercomments"
                       },
                       "title": "Attachments"
+                    },
+                    "ProcessHistory": {
+                      "template": "approval.ext.fragment.ProcessHistory",
+                      "position": {
+                        "placement": "After",
+                        "anchor": "Approvercomments"
+                      },
+                      "title": "ProcessHistory"
+                    }
+                  }
+                },
+                "footer": {
+                  "actions": {
+                    "ApprovalActions": {
+                      "press": "approval.ext.controller.ApproveReject.onApprovePress",
+                      "enabled": true,
+                      "text": "Approve",
+                      "visible": "true"
+                    },
+                    "RejectAction": {
+                      "press": "approval.ext.controller.ApproveReject.onRejectPress",
+                      "enabled": true,
+                      "text": "Reject",
+                      "visible": "true"
                     }
                   }
                 }
@@ -212,7 +236,11 @@
     },
     "extends": {
       "extensions": {
-        "sap.ui.controllerExtensions": {}
+        "sap.ui.controllerExtensions": {
+          "sap.fe.templates.ObjectPage.ObjectPageController#approval::IssuesObjectPage": {
+            "controllerName": "approval.ext.controller.IssueObjectController"
+          }
+        }
       }
     }
   },

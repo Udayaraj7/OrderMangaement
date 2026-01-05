@@ -23,6 +23,11 @@ annotate service.Issues with @(
                 $Type : 'UI.DataField',
                 Value : requestType_code,
             },
+            {
+                $Type : 'UI.DataField',
+                Value : processInstanceId,
+                Label : 'processInstanceId',
+            },
         ],
     },
     UI.Facets : [
