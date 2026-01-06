@@ -98,6 +98,15 @@ sap.ui.define([
 
                 console.log("Comment updated successfully:", oResponse);
                 sComment.setValue("");
+
+                const oContext = sap.ui.core.Element.getElementById(
+                            "approval::IssuesObjectPage--fe::CustomSubSection::ProcessHistory--approvalHistoryTable"
+                        ).getBindingContext();
+
+                     oContext.requestSideEffects([{
+                    $NavigationPropertyPath: "IssuesToApprovalHistory"
+                }]);
+
                 sap.m.MessageBox.success("Approved successfully");
 
             } catch (error) {
@@ -159,6 +168,14 @@ sap.ui.define([
                         "Prefer": "return=representation"
                     }
                 });
+
+                const oContext = sap.ui.core.Element.getElementById(
+                            "approval::IssuesObjectPage--fe::CustomSubSection::ProcessHistory--approvalHistoryTable"
+                        ).getBindingContext();
+
+                     oContext.requestSideEffects([{
+                    $NavigationPropertyPath: "IssuesToApprovalHistory"
+                }]);
 
                 sap.m.MessageBox.error("Issue rejected");
 

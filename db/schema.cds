@@ -129,7 +129,9 @@ entity ApprovalHistory:cuid {
     approverEmail       : String ;
     status           : String ;
     startedOn       : DateTime;
-    timeTaken:DateTime;
+    completedOn:DateTime;
+    timeTaken:String;
+
      ApprovalHistoryToIssues : Association to one Issues on ApprovalHistoryToIssues.issueId = issueId;
      ApprovalHistoryToOrders : Association to one Orders on ApprovalHistoryToOrders.orderId = orderId;
    

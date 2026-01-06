@@ -25,11 +25,9 @@ service OrderIssueService {
 
 
         function  triggerBpaProcess(issueId:String,orderId:String)
-        returns String;
+        returns String;     
 
-
-       
-        
+      
 }
 
 

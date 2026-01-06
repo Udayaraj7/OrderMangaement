@@ -164,21 +164,21 @@ module.exports = cds.service.impl(function (srv) {
 
             //process history
 
-            const level = 1;
+            
 
             const levelApprovers = await SELECT
-                .from('Approvers')
-                .columns('approverName', 'approverEmail')
-                .where({ approverLevel: level });
+                .from('Approvers');
+                
 
             const historyEntries = levelApprovers.map(a => ({
                 orderId: orderid,
                 issueId: issueid,
                 processInstanceId: instanceId,
-                level: level,
+                level: a.approverLevel,
                 approverName: a.approverName,
                 approverEmail: a.approverEmail,
-                status: "Pending"
+                status: "Pending",
+                startedOn:new Date().toISOString()
             }));
 
             await INSERT.into(ApprovalHistory).entries(historyEntries);

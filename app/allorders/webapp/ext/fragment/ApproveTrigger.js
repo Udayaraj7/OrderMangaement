@@ -31,6 +31,9 @@ sap.ui.define([
                             const result = oFunc.getBoundContext().getObject();
                             console.log("Result:", result);
 
+     
+
+
                             MessageToast.show("Approved successfully");
                         }
                     }

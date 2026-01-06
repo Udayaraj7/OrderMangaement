@@ -69,6 +69,12 @@
                     </header>
                 </Column>
 
+                 <Column id="colTimetaken" minScreenWidth="Tablet" demandPopin="true">
+                    <header>
+                        <Text id="hdrtimetaken" text="Time Taken" />
+                    </header>
+                </Column>
+
             </columns>
 
             <!-- ===== Items ===== -->
@@ -87,9 +93,12 @@
                     <Text
                         id="txtStartedOn"
                         text="{startedOn}" />
+                         <Text
+                        id="txtCompletedOn"
+                        text="{completedOn}" />
 
                     <Text
-                        id="txtCompletedOn"
+                        id="txttimeTaken"
                         text="{timeTaken}" />
 
                 </ColumnListItem>

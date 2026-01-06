@@ -3,6 +3,22 @@ const { SELECT } = require('@sap/cds/lib/ql/cds-ql');
 const axios = require('axios')
 
 
+  function getDayDiff(dateTime1, dateTime2) {
+    debugger;
+    const d1 = new Date(dateTime1);
+    const d2 = new Date(dateTime2);
+
+    
+    d1.setHours(0, 0, 0, 0);
+    d2.setHours(0, 0, 0, 0);
+
+    const diffDays = Math.abs((d2 - d1) / (1000 * 60 * 60 * 24));
+
+    
+    return diffDays === 0 ? '1 Day' : diffDays+1+' Days';
+}
+
+
 module.exports = cds.service.impl(function (srv) {
     console.log("Service name:-->", srv.name);
 
@@ -66,7 +82,7 @@ module.exports = cds.service.impl(function (srv) {
 
             console.log("final response", response11)
 
-            await new Promise(resolve => setTimeout(resolve, 2000));
+            await new Promise(resolve => setTimeout(resolve, 3000));
 
 
 
@@ -79,37 +95,36 @@ module.exports = cds.service.impl(function (srv) {
             console.log("-------------------", approveResponse.data.custom)
             let custom = approveResponse.data.custom;
 
-            //update status and started and completion date
+            //update 
             await UPDATE(ApprovalHistory)
                 .set({
                     status: custom.status,
                     startedOn: custom.startedoncopy,
-                    timeTaken: custom.timetaken
+                    completedOn: custom.timetaken,
+                    timeTaken:getDayDiff(custom.startedoncopy,custom.timetaken)
                 })
                 .where({
                     level: custom.clevel,
                     processInstanceId: custom.processid
                 });
 
-            if (custom.status == "Approved" && custom.clevel < approveResponse.data.startEvent.levels) {
-                let nlevel = custom.clevel + 1;
-
-                const levelApprovers = await SELECT
-                    .from('Approvers')
-                    .columns('approverName', 'approverEmail')
-                    .where({ approverLevel: nlevel });
-
-                const historyEntries = levelApprovers.map(a => ({
-                    orderId: approveResponse.data.startEvent.orderId,
-                    issueId: approveResponse.data.startEvent.issuid,
-                    processInstanceId: custom.processid,
-                    level: nlevel,
-                    approverName: a.approverName,
-                    approverEmail: a.approverEmail,
-                    status: "Pending"
-                }));
-
-                await INSERT.into(ApprovalHistory).entries(historyEntries);
+            if (custom.status !== "Approved" && custom.clevel < approveResponse.data.startEvent.levels) {
+                
+                let nextlevel=custom.clevel+1;
+                for(let i=nextlevel ;i<=approveResponse.data.startEvent.levels;i++)
+                {
+                     await UPDATE(ApprovalHistory)
+                .set({
+                    status: custom.status,
+                    startedOn: custom.startedoncopy,
+                    completedOn: custom.timetaken,
+                    timeTaken:getDayDiff(custom.startedoncopy,custom.timetaken)
+                })
+                .where({
+                    level: i,
+                    processInstanceId: custom.processid
+                });
+                }  
             }
 
           
@@ -124,16 +139,13 @@ module.exports = cds.service.impl(function (srv) {
 
 
 
-
-
-
-
-
         } catch (error) {
             console.log(error)
         }
 
     });
+  
+
 
 
 });
