@@ -1,0 +1,2 @@
+sap.ui.define(["sap/ui/core/UIComponent","basicproject/model/models"],(e,t)=>{"use strict";return e.extend("basicproject.Component",{metadata:{manifest:"json",interfaces:["sap.ui.core.IAsyncContentCreation"]},init(){e.prototype.init.apply(this,arguments);this.setModel(t.createDeviceModel(),"device");this.getRouter().initialize();sap.ui.getCore().applyTheme("sap_fiori_3");jQuery.sap.includeStyleSheet(sap.ui.require.toUrl("basicproject/css/style.css"))}})});
+//# sourceMappingURL=Component.js.map

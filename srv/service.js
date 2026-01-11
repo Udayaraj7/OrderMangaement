@@ -29,6 +29,8 @@ module.exports = cds.service.impl(function (srv) {
     
     this.before("CREATE", Customer, req => {
         debugger;
+        const id = Date.now();
+        req.data.customerId = `C0${id}`;
         
         if (!req.data.customerName) {
             req.error(400, "Name is required");
@@ -54,7 +56,7 @@ module.exports = cds.service.impl(function (srv) {
                   }
 
              if (!req.data.address) {
-            req.error(400, "email is required");
+            req.error(400, "address is required");
                  }
 
         }  

@@ -1,0 +1,2 @@
+sap.ui.define(["sap/ui/core/mvc/Controller","sap/ui/model/json/JSONModel"],(e,t)=>{"use strict";return e.extend("basicproject.controller.View1",{onInit:function(){},onItemPress:function(e){debugger;const t=e.getSource();const o=t.getBindingContext();const n=o.getProperty("customerId");this.getOwnerComponent().getRouter().navTo("object",{customerId:n})}})});
+//# sourceMappingURL=View1.controller.js.map

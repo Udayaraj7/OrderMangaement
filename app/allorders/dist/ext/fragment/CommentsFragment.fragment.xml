@@ -1,0 +1,45 @@
+<core:FragmentDefinition
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m">
+
+    <VBox
+        id="commentsFragmentVBox"
+        width="100%"
+        class="sapUiSmallMargin"
+        core:require="{ handler: 'allorders/ext/fragment/CommentsFragment' }">
+
+        <Text
+            id="commentsFragment-TitleText"
+            text="Add Comment"
+            class="sapUiSmallMarginBottom" />
+
+        <HBox 
+            id="commentsFragment-ViewAllHBox"
+            width="100%" 
+            justifyContent="End">
+            <Button
+                id="commentsFragment-ViewAllButton"
+                text="View All Comments"
+                type="Transparent"
+                press="handler.onLoadComments"
+                icon="sap-icon://comment"/>
+        </HBox>
+
+        <TextArea
+            id="commentsFragment-CommentTextArea"
+            rows="5"
+            width="100%"
+            placeholder="Enter your comment..."
+            enabled="{= !${IsActiveEntity}}" />
+
+        <HBox
+            id="commentsFragment-ButtonHBox"
+            justifyContent="End"
+            class="sapUiSmallMarginTop">
+
+           
+
+        </HBox>
+
+    </VBox>
+</core:FragmentDefinition>

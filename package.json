@@ -5,14 +5,18 @@
   "dependencies": {
     "@cap-js/hana": "^2",
     "@sap/cds": "^9",
-    "express": "^4"
+    "@sap/xsenv": "^6.0.0",
+    "@sap/xssec": "^4.12.1",
+    "axios": "^1.13.2",
+    "express": "^4",
+    "passport": "^0.7.0"
   },
   "devDependencies": {
     "@cap-js/sqlite": "^2",
     "@sap/cds-dk": "^9",
     "cds-plugin-ui5": "^0.13.0",
-    "rimraf": "^5.0.5",
-    "mbt": "^1.2.29"
+    "mbt": "^1.2.29",
+    "rimraf": "^5.0.5"
   },
   "scripts": {
     "start": "cds-serve",
@@ -30,7 +34,11 @@
   "private": true,
   "cds": {
     "requires": {
-      "db": "hana"
+      "db": "hana",
+      "auth":"dummy"
+    },
+    "fiori" :{
+      "bypass_draft": true
     },
     "features": {
       "draft_lock_timeout": "2m"

@@ -111,11 +111,14 @@ module.exports = cds.service.impl(function (srv) {
     this.on('triggerBpaProcess', async function (req) {
         debugger
         try {
+            //recieves issueid,orderid
             console.log("process trigger");
-            var client = 'sb-951593b7-8581-4dd7-92c3-5d3365b85829!b556490|xsuaa!b49390';
-            var secret = '9103527d-a7bd-43c1-8109-1a9a1d47b821$OqiNr-QeAWXjd-aPHHqPug8GK11Ub8QxIS-fPIBZhUM=';
+            // generating access token
+            
+            var client = 'sb-b2ea7fb0-c226-4102-9236-5ab259e61df0!b577464|xsuaa!b49390';
+            var secret = 'c646891e-7b5f-4cac-b1bb-47aaff6bc4f4$eQfCsLlp7xlRirz0OckLmYTnW7M-Yh0HxhEhgtb7HiA=';
             var auth1 = Buffer.from(client + ':' + secret, 'utf-8').toString('base64');
-            var response1 = await axios.request('https://17d1f7fatrial.authentication.us10.hana.ondemand.com/oauth/token?grant_type=client_credentials', {
+            var response1 = await axios.request('https://5b792c81trial.authentication.us10.hana.ondemand.com/oauth/token?grant_type=client_credentials', {
                 method: 'POST',
                 headers: {
                     'Authorization': 'Basic ' + auth1
@@ -123,10 +126,11 @@ module.exports = cds.service.impl(function (srv) {
             });
             console.log(response1);
 
-
+            //select max levels from approvers table
             //const totalApprovers = (await SELECT.from(Approvers).columns('count(*) as total'))[0].total;
             const maxLevel = (await SELECT.from(Approvers).columns('max(approverLevel) as maxLevel'))[0]?.maxLevel ?? 0;
 
+            //select approvers
             const approvers = await SELECT.from(Approvers);
 
             var body = JSON.parse(JSON.stringify(
@@ -153,6 +157,7 @@ module.exports = cds.service.impl(function (srv) {
             let orderid = req.data.orderId;
             console.log("instance id", instanceId);
 
+            //updating process id 
             await UPDATE(Issues)
                 .set({ processInstanceId: instanceId })
                 .where({ issueId: issueid });
@@ -161,8 +166,6 @@ module.exports = cds.service.impl(function (srv) {
                 .set({ processInstanceId: instanceId })
                 .where({ issueId: issueid });
 
-
-            //process history
 
             
 

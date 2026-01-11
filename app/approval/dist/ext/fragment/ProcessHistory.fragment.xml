@@ -1,0 +1,110 @@
+<core:FragmentDefinition
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:macros="sap.fe.macros">
+
+    <VBox
+        id="phVBox"
+        core:require="{ handler: 'approval/ext/fragment/ProcessHistory' }">
+
+         <Table
+    id="approvalHistoryTable"
+    headerText="Approval History"
+    items="{
+        path: 'IssuesToApprovalHistory',
+        sorter: [
+            { path: 'level', descending: false },
+            { path: 'startedOn', descending: false }
+        ]
+    }">
+
+            <!-- ===== Columns ===== -->
+            <columns>
+
+                <Column id="colLevel" mergeDuplicates="true">
+                    <header>
+                        <Text id="hdrLevel" text="Level" />
+                    </header>
+                </Column>
+
+                <Column id="colIssueId">
+                    <header>
+                        <Text id="hdrIssueId" text="Issue ID" />
+                    </header>
+                </Column>
+
+                <Column id="colProcessInstanceId">
+                    <header>
+                        <Text id="hdrProcessInstanceId" text="Process Instance ID" />
+                    </header>
+                </Column>
+
+                <Column id="colApproverName">
+                    <header>
+                        <Text id="hdrApproverName" text="Approver Name" />
+                    </header>
+                </Column>
+
+                <Column id="colApproverEmail">
+                    <header>
+                        <Text id="hdrApproverEmail" text="Approver Email" />
+                    </header>
+                </Column>
+
+                <Column id="colStatus">
+                    <header>
+                        <Text id="hdrStatus" text="Status" />
+                    </header>
+                </Column>
+
+                <Column id="colStartedOn" minScreenWidth="Tablet" demandPopin="true">
+                    <header>
+                        <Text id="hdrStartedOn" text="Started On" />
+                    </header>
+                </Column>
+
+                <Column id="colCompletedOn" minScreenWidth="Tablet" demandPopin="true">
+                    <header>
+                        <Text id="hdrCompletedOn" text="Completed On" />
+                    </header>
+                </Column>
+
+                 <Column id="colTimetaken" minScreenWidth="Tablet" demandPopin="true">
+                    <header>
+                        <Text id="hdrtimetaken" text="Time Taken" />
+                    </header>
+                </Column>
+
+            </columns>
+
+            <!-- ===== Items ===== -->
+            <items>
+                <ColumnListItem
+                    id="approvalHistoryRow"
+                    vAlign="Middle">
+
+                    <Text id="txtLevel" text="{level}" />
+                    <Text id="txtIssueId" text="{issueId}" />
+                    <Text id="txtProcessInstanceId" text="{processInstanceId}" />
+                    <Text id="txtApproverName" text="{approverName}" />
+                    <Text id="txtApproverEmail" text="{approverEmail}" />
+                    <Text id="txtStatus" text="{status}" />
+
+                    <Text
+                        id="txtStartedOn"
+                        text="{startedOn}" />
+                         <Text
+                        id="txtCompletedOn"
+                        text="{completedOn}" />
+
+                    <Text
+                        id="txttimeTaken"
+                        text="{timeTaken}" />
+
+                </ColumnListItem>
+            </items>
+
+        </Table>
+
+    </VBox>
+</core:FragmentDefinition>

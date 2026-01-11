@@ -1,0 +1,55 @@
+<mvc:View
+    controllerName="basicproject.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m">
+
+    <Page title="Customer List">
+        <content>
+
+            <Table
+                id="employeeTable"
+                class="customTable "
+                fixedLayout="true"
+                width="70rem"
+                items="{/Customer}">
+
+                <columns>
+                    <Column width="5rem">
+                        <Text text="Customer Id"/>
+                    </Column>
+                    <Column width="5rem">
+                        <Text text="Customer Name"/>
+                    </Column>
+                    <Column width="7rem">
+                        <Text text="Email"/>
+                    </Column>
+                    <Column width="6rem">
+                        <Text text="Phone Number"/>
+                    </Column>
+                    <Column width="4rem">
+                        <Text text="Address"/>
+                    </Column>
+                </columns>
+
+                <items>
+                    <ColumnListItem
+                        type="Navigation"
+                        press="onItemPress"
+                        class="customRow">
+
+                        <cells>
+                            <Text text="{customerId}" class="customerId"/>
+                            <Text text="{customerName}" class="customerName"/>
+                            <Text text="{email}" class="emailText"/>
+                            <Text text="{phoneNumber}"/>
+                            <Text text="{address}"/>
+                        </cells>
+
+                    </ColumnListItem>
+                </items>
+
+            </Table>
+
+        </content>
+    </Page>
+</mvc:View>

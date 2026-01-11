@@ -38,10 +38,7 @@ modules:
       - admin.zip
       name: admin
       target-path: resources/
-    - artifacts:
-      - orders.zip
-      name: orders
-      target-path: resources/
+    
     - artifacts:
       - allorders.zip
       name: allorders
@@ -65,16 +62,6 @@ modules:
 - name: admin
   type: html5
   path: app/admin
-  build-parameters:
-    build-result: dist
-    builder: custom
-    commands:
-    - npm install
-    - npm run build:cf
-    supported-platforms: []
-- name: orders
-  type: html5
-  path: app/orders
   build-parameters:
     build-result: dist
     builder: custom
