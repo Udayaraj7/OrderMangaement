@@ -6,15 +6,33 @@ module.exports = cds.service.impl(function (srv) {
 
   
    const { Customer,Orders } = this.entities;
- this.before('CREATE', Customer.drafts, (req) => {
-        debugger;
+//  this.before('CREATE', Customer.drafts, (req) => {
+//         debugger;
         
-         const id = Date.now();
-        req.data.customerId = `C0${id}`;
+//          const id = Date.now();
+//         req.data.customerId = `C${id}`;
         
 
-        console.log('draft Generated customer is:', req.data.customerId);
+//         console.log('draft Generated customer is:', req.data.customerId);
+//     });
+
+ this.before('CREATE', Customer.drafts, async (req) => {
+        debugger;
+        const tx = cds.transaction(req);
+
+        const result = await tx.run(
+            SELECT.one
+                .from(Customer)
+                .columns('customerNo')
+                .orderBy({ customerNo: 'desc' })
+        );
+
+        const nextNo = result ? result.customerNo + 1 : 1;
+
+        req.data.customerNo = nextNo;
+        req.data.customerId = `C${nextNo}`;
     });
+
 
      this.before('CREATE', Orders.drafts, (req) => {
         debugger;
@@ -29,8 +47,8 @@ module.exports = cds.service.impl(function (srv) {
     
     this.before("CREATE", Customer, req => {
         debugger;
-        const id = Date.now();
-        req.data.customerId = `C0${id}`;
+        // const id = Date.now();
+        // req.data.customerId = `C0${id}`;
         
         if (!req.data.customerName) {
             req.error(400, "Name is required");

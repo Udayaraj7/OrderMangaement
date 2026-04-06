@@ -8,9 +8,10 @@ entity Customer {
     @title : 'customerId'
     @readonly
     key customerId : String;
+    customerNo     : Integer;
     customerName : String;
     email : String;
-    phoneNumber : String;
+    phoneNumber : String(10) @assert.format: '^[0-9]{10}$';
     address : String;
     CustomerToOrders : Composition of many Orders on CustomerToOrders.OrdersToCustomer = $self;
 }
@@ -116,8 +117,7 @@ entity Approvers{
     key approverId:String;
     approverName:String;
     approverEmail:String;
-    approverLevel:Integer;
-    
+    approverLevel:Integer;   
 }
 
 entity ApprovalHistory:cuid {

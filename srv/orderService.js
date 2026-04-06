@@ -98,9 +98,15 @@ module.exports = cds.service.impl(function (srv) {
         debugger;
         console.log("---comment-----")
         if (!req.data.description) {
+            console.log("comment validation")
             req.reject(400, "Comment cannot be EMPTY");
+            //req.error(400, "Comment cannot be EMPTY");
         }
     });
+
+
+
+ 
 
 
 

@@ -124,9 +124,6 @@ onLoadComments: async function (oEvent) {
     this._commentsDialog.open();
 }
 
-
-
-
     }
 });
 
