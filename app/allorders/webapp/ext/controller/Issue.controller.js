@@ -6,6 +6,9 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension'], function (ControllerExten
 		override: {
 
 
+			
+
+
 			onInit: function () {
 				// Wait for the view to render, then attach to the Apply button
 				const oView = this.getView();  // or this.base.getView()
@@ -17,8 +20,9 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension'], function (ControllerExten
 
 
 						if (oApplyButton) {
-							oApplyButton.attachPress(async function () {
+							oApplyButton.attachPress(async function (oEvent) {
 								debugger;
+								oEvent.preventDefault();
 								console.log("Apply button clicked on Issues sub-page - custom logic triggered!");
 								let issueid = sap.ui.core.Element.getElementById("allorders::Orders_OrdersToIssuesObjectPage--fe::FormContainer::GeneralInformation::FormElement::DataField::issueId::Field-display");
 
@@ -36,7 +40,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension'], function (ControllerExten
 										console.log("--->>>>>comment is empty" );
 										// setTimeout(function () {
     									// sap.m.MessageBox.error("no comments enter the comment")
-										// 		}, 3000);
+										// 		}, 100);
 										//return;
 											
 									}
